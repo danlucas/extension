@@ -1,32 +1,35 @@
-var myUrl = urlFinder();
+// Copyright (c) 2012 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
 
-function urlFinder () {
-	if ($("#button") === "one") {
-		return "http://app.bronto.com";
-	}
-	else if ($("#button") === "two") {
-		return "http://bronto.com/welcomekit";
-	} else {
-		return "https://server.iad.liveperson.net/hc/77739214/?cmd=file&file=visitorWantsToChat&site=77739214&byhref=1&SESSIONVAR!skill=Lead%20Qualification&imageUrl=https://server.iad.liveperson.nethttps://hosting-source.bronto.com/7894/public/LivePerson/";
-	}
+
+// var buttonPress = buttonSelect ();
+
+function urlFinder (id) {
+    if (id === "one") {
+        return ("http://app.bronto.com");
+    }
+    else if (id === "two") {
+        return ("http://bronto.com/welcomekit");
+    } else  {
+        return ("https://server.iad.liveperson.net/hc/77739214/?cmd=file&file=visitorWantsToChat&site=77739214&byhref=1&SESSIONVAR!skill=Lead%20Qualification&imageUrl=https://server.iad.liveperson.nethttps://hosting-source.bronto.com/7894/public/LivePerson/");
+    }
 }
 
-function awesome() {
-  chrome.tabs.create({url: myUrl});
-}  
+// function buttonSelect () {
+//     $('button').click(function() {
+//         console.log( $(this).attr("id"));
+//     });
+// }
 
-function clickHandler(e) {
-  setTimeout(awesome, 1000);
+function goToUrl(e) {
+    var myUrl = urlFinder(e.target.id);
+    chrome.tabs.create({url: myUrl});
 }
 
-function main() {
-  // Initialization work goes here.
-}
-
-// Add event listeners once the DOM has fully loaded by listening for the
-// `DOMContentLoaded` event on the document, and adding your listeners to
-// specific elements when it triggers.
 document.addEventListener('DOMContentLoaded', function () {
-  document.querySelector('button').addEventListener('click', clickHandler);
-  main();
+  var buttons = document.querySelectorAll('button');
+  for (var i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener('click', goToUrl);
+  }
 });

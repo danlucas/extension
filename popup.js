@@ -1,8 +1,14 @@
 
-var ary = new Array();
-$("button.selected").each(function(){
-  ary.push(this.id);
-});
+function urlFinder () {
+	if $("#button") = "one" {
+		return "www.bronto.com";
+	}
+	else if $(#button) = "two" {
+		return "www.google.com";
+	} else {
+		return "www.facebook.com";
+	}
+}
 
 function awesome() {
   chrome.tabs.create({url: urlFinder});
